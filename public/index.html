@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Metaverse World</title>
+    <style>
+        body,
+        html {
+          margin: 0;
+          padding: 0;
+          overflow: hidden;
+          height: 100%;
+          width: 100%;
+        }
+        canvas {
+          display: block;
+        }
+      </style>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+
+<!-- Add the Firebase Realtime Database SDK -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+<!-- Firebase configuration -->
+<script>
+  var firebaseConfig = {
+    apiKey: "AIzaSyBj8fm8M_KeJbtlz3BZ7_FDEhC0jYMEmJ0",
+    authDomain: "my-metaverse.firebaseapp.com",
+    databaseURL: "https://my-metaverse-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "my-metaverse",
+    storageBucket: "my-metaverse.appspot.com",
+    messagingSenderId: "998038716204",
+    appId: "1:998038716204:web:dac5357c69edef2839b689"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cannon.js/0.6.2/cannon.min.js"></script>
+    <script src="/dist/bundle.js"></script>
+      
+
+</body>
+</html>
