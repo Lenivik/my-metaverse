@@ -278,7 +278,9 @@ document.addEventListener('pointerlockchange', () => {
 const loader = new GLTFLoader();
 
 // Create duplicate variables outside of the addModelsToScene function
-let duplicate1, duplicate2, duplicate3;
+const duplicate1 = new THREE.Object3D();
+const duplicate2 = new THREE.Object3D();
+const duplicate3 = new THREE.Object3D();
 
 // Function to add models to the scene
 function addModelsToScene(gltf) {
@@ -296,30 +298,31 @@ function addModelsToScene(gltf) {
     return treeBody;
   }
 
-  gltf.scene.position.set(2, 0, -5);
-  scene.add(gltf.scene);  
-  createTreeBody(2, 0, -5);
+ // Set the position of the original model
+ gltf.scene.position.set(2, 0, -5);
+ scene.add(gltf.scene);  
+ createTreeBody(2, 0, -5);
 
-  // Duplicate the model and set its position
-  duplicate1 = gltf.scene.clone();
-  duplicate1.userData = { clicks: 0 };
-  duplicate1.position.set(5, 0, -5);
-  scene.add(duplicate1);
-  createTreeBody(5, 0, -5);
+ // Duplicate the model and set its position
+ const duplicate1 = gltf.scene.clone();
+ duplicate1.userData = { clicks: 0 };
+ duplicate1.position.set(5, 0, -5);
+ scene.add(duplicate1);
+ createTreeBody(5, 0, -5);
 
-  // Duplicate the model again and set its position
-  duplicate2 = gltf.scene.clone();
-  duplicate2.userData = { clicks: 0 };
-  duplicate2.position.set(-5, 0, -5);
-  scene.add(duplicate2);
-  createTreeBody(-5, 0, -5);
+ // Duplicate the model again and set its position
+ const duplicate2 = gltf.scene.clone();
+ duplicate2.userData = { clicks: 0 };
+ duplicate2.position.set(-5, 0, -5);
+ scene.add(duplicate2);
+ createTreeBody(-5, 0, -5);
 
-  // Duplicate the model again and set its position
-  duplicate3 = gltf.scene.clone();
-  duplicate3.userData = { clicks: 0 };
-  duplicate3.position.set(-5, 0, 1);
-  scene.add(duplicate3);
-  createTreeBody(-5, 0, 1);
+ // Duplicate the model again and set its position
+ const duplicate3 = gltf.scene.clone();
+ duplicate3.userData = { clicks: 0 };
+ duplicate3.position.set(-5, 0, 1);
+ scene.add(duplicate3);
+ createTreeBody(-5, 0, 1);
 }
 
 //Add a raycaster and a clock for the tree respawn timer:
@@ -365,26 +368,28 @@ function cutTree(tree, stump) {
 }
 
 
-// //an event listener for mouse clicks, and perform raycasting to detect if a tree has been clicked
-// document.addEventListener('mousedown', (event) => {
-//   if (event.button === 0) { // Left click
-//     raycaster.setFromCamera(new THREE.Vector2(), camera);
+//an event listener for mouse clicks, and perform raycasting to detect if a tree has been clicked
+document.addEventListener('mousedown', (event) => {
+  if (event.button === 0) { // Left click
+    raycaster.setFromCamera(new THREE.Vector2(), camera);
 
-//     // List of objects to test for intersection (add tree meshes to this list)
-//     const objects = [mainTree, duplicate1, duplicate2, duplicate3];
+    // List of objects to test for intersection (add tree meshes to this list)
+    const objects = [mainTree, duplicate1, duplicate2, duplicate3];
 
-//     const intersects = raycaster.intersectObjects(objects);
-//     console.log('Intersects:', intersects); // Log intersects
+    const intersects = raycaster.intersectObjects(objects);
+    console.log('Intersects:', intersects); // Log intersects
 
-//     if (intersects.length > 0) {
-//       const clickedTree = intersects[0].object;
-//       console.log('Clicked tree:', clickedTree); // Log clicked tree
-//       const stump = stumpModel.clone();
-//       stump.position.copy(clickedTree.position);
-//       cutTree(clickedTree, stump);
-//     }
-//   }
-// });
+    if (intersects.length > 0) {
+      const clickedTree = intersects[0].object;
+      console.log('Clicked tree:', clickedTree); // Log clicked tree
+      const stump = stumpModel.clone();
+      stump.position.copy(clickedTree.position);
+      cutTree(clickedTree, stump);
+    }
+  }
+});
+
+
 
 
 loader.load(
